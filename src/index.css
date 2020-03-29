@@ -1,0 +1,187 @@
+body {
+  color: white;
+  background-color: rgb(24, 22, 22);
+}
+h1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  color: lightblue;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+.addNewBookmark {
+  color: lightblue;
+}
+input[type="text"],
+input[type="create"],
+input[type="cancel"] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  background-color: lightblue;
+  border: none;
+  border-radius: 10px;
+  color: rgb(0, 4, 251);
+  font-size: 20px;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.js-initialPage {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+.addNew {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 25px;
+  width: 75px;
+  height: auto;
+  margin: 50px;
+  background-color: aquamarine;
+}
+.filter {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 25px;
+  width: 75px;
+  height: auto;
+  margin: 50px;
+  background-color: aquamarine;
+}
+.cancel {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 25px;
+  width: 75px;
+  height: auto;
+  margin: 50px;
+  background-color: aquamarine;
+}
+.create {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 25px;
+  width: 75px;
+  height: auto;
+  margin: 50px;
+  background-color: aquamarine;
+}
+.submit {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 25px;
+  width: 75px;
+  height: auto;
+  margin: 50px;
+  background-color: aquamarine;
+}
+.js-addBookmarkPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.initialPageButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+.addNewRating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+fieldset {
+  border: none;
+}
+.rate-area {
+  display: flex;
+  flex-direction: row-reverse;
+  border: none;
+}
+.rate-area:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+  clip: rect(0, 0, 0, 0);
+  border: none;
+}
+.rate-area:not(:checked) > label {
+  display: flex;
+  width: 50px;
+  padding: 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 150%;
+  line-height: 1.2;
+  color: lightblue;
+  border: none;
+}
+.rate-area:not(:checked) > label:before {
+  content: "★";
+  border: none;
+}
+.rate-area > input:checked ~ label {
+  color: gold;
+  text-shadow: 1px 1px #c60;
+  font-size: 150% !important;
+  border: none;
+}
+
+.rate-area:not(:checked) > label:hover,
+.rate-area:not(:checked) > label:hover ~ label {
+  color: gold;
+  border: none;
+}
+
+.rate-area > input:checked + label:hover,
+.rate-area > input:checked + label:hover ~ label,
+.rate-area > input:checked ~ label:hover,
+.rate-area > input:checked ~ label:hover ~ label,
+.rate-area > label:hover ~ input:checked ~ label {
+  color: gold;
+  text-shadow: 1px 1px goldenrod;
+  border: none;
+}
+
+.rate-area > label:active {
+  position: relative;
+  top: 2px;
+  left: 2px;
+  border: none;
+}
