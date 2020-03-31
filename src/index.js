@@ -3,20 +3,17 @@ import api from './api';
 import pages from './pages';
 import store from './store';
 import events from './events';
+import './index.css';
 
-import "index.css";
 
 const main = function () {
   api.getUrl()
-    .then(res => res.json())
+    // .then(res => res.json())
     .then((bookmarks) => {
-      bookmarks.foreach((bookmark) => store.addBookmark(bookmark));
-      bookmarksList.render();
+      bookmarks.forEach((bookmark) => store.addBookmark(bookmark));
+      pages.render();
     });
-
-  bookmarkList.bindEventListeners();
-  bookmarkList.render();
-
+  events.bindEventListeners();
 };
 
 $(main);

@@ -1,5 +1,8 @@
-$(document).ready(function () {
-  //dropdown menu function code
+import $ from 'jquery';
+import pages from "./pages";
+
+//dropdown menu function code
+function dropDown() {
   $('.filter-menu').on('click', '#dropdown', event => {
     event.preventDefault();
     console.log('dropdown menu option clicked!');
@@ -9,9 +12,10 @@ $(document).ready(function () {
       const bookmarks = STORE.list.filter(bookmarks => bookmarks.rating >= 1);
       return bookmarks;
     }
-    renderStore();
+    pages.render();
   });
-});
+}
+
 const generateBookmarkElement = function (item) {
   let bookmarkTitle = `<span class="bookmark-item bookmark-item__checked">${bookmarks.name}</span>`;
   if (!bookmarks.checked) {
@@ -68,69 +72,73 @@ const handleNewBookmarkSubmit = function () {
 const handleItemCheckClicked = function () {
   $(".js-shopping-list").on("click", ".js-item-toggle", event => {
     const id = getItemIdFromElement(event.currentTarget);
-    const item = store.findById(id);
-    api.updateItem(id, { checked: !item.checked })
+    const bookmark = store.findById(id);
+    api.updateItem(id, { checked: !bookmark.checked })
       .then(response => response.json()
         .then(() => {
-          store.findAndUpdate(id, { checked: !item.checked });
+          store.findAndUpdate(id, { checked: !bookmark.checked });
           render();
         })
         .catch((error) => {
           console.log('something went wrong', error)
         }));
-
-    const getItemIdFromElement = function (item) {
-      return $(item)
-        .closest(".js-item-element")
-        .data("item-id");
-    };
-
-    const handleDeleteBookmarkClicked = function () {
-      $(".js-shopping-list").on("click", ".js-item-delete", event => {
-        const id = getItemIdFromElement(event.currentTarget);
-        api.updateItem(id, item)
-        then(response => response.json())
-          .then(() => {
-            store.findAndUpdate(id, { item: [''] });
-            render();
-          }
-          );
-      });
-    };
-
-    const handleToggleFilterClick = function () {
-      $(".js-filter-checked").click(() => {
-        store.toggleCheckedFilter();
-        render();
-      });
-    };
-
-    const handleEditBookmarkSubmit = function () {
-      $(".js-shopping-list").on("submit", ".js-edit-item", event => {
-        event.preventDefault();
-        const id = getItemIdFromElement(event.currentTarget);
-        const itemName = $(event.currentTarget)
-          .find(".shopping-item")
-          .val();
-        store.findAndUpdateName(id, itemName);
-        store.findAndUpdate(id, itemName);
-        api.updateItem(id, { itemName })
-          .then(response => response.json())
-          .then(itemName => {
-            store.findAndUpdate(id, { itemName });
-            render();
-          });
-        render();
-      });
-    };
-
-    const bindEventListeners = function () {
-
-    };
-
-    export default {
-      render,
-      bindEventListeners
-    }
   })
+}
+const getItemIdFromElement = function (bookmark) {
+  return $(bookmark)
+    .closest(".js-item-element")
+    .data("item-id");
 };
+
+const handleDeleteBookmarkClicked = function () {
+  $(".js-shopping-list").on("click", ".js-item-delete", event => {
+    const id = getItemIdFromElement(event.currentTarget);
+    api.updateItem(id, item)
+    then(response => response.json())
+      .then(() => {
+        store.findAndUpdate(id, { item: [''] });
+        render();
+      }
+      );
+  });
+};
+
+const handleToggleFilterClick = function () {
+  $(".js-filter-checked").click(() => {
+    store.toggleCheckedFilter();
+    render();
+  });
+};
+
+const handleEditBookmarkSubmit = function () {
+  $(".js-shopping-list").on("submit", ".js-edit-item", event => {
+    event.preventDefault();
+    const id = getItemIdFromElement(event.currentTarget);
+    const bookmarkName = $(event.currentTarget)
+      .find(".shopping-item")
+      .val();
+    store.findAndUpdateName(id, bookmarkName);
+    store.findAndUpdate(id, bookmarkName);
+    api.updateItem(id, { bookmarkName })
+      .then(response => response.json())
+      .then(bookmarkName => {
+        store.findAndUpdate(id, { bookmarkName });
+        render();
+      });
+    render();
+  });
+};
+
+const bindEventListeners = function () {
+  handleEditBookmarkSubmit();
+  handleToggleFilterClick();
+  handleDeleteBookmarkClicked();
+  handleItemCheckClicked();
+  handleNewBookmarkSubmit();
+  // generateBookmarksString();
+};
+
+export default {
+  render,
+  bindEventListeners
+}
