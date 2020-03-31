@@ -2,40 +2,23 @@ import $ from 'jquery';
 import STORE from './store';
 
 //Generate the HTML strings
-function initialPage() {
-  return `
-  <div class="startButtons"></div>
-  <button class="addNew" id="addNew" type="addNew">Add New</button>
-<div class="filter-menu">
-  <select id="dropdown" name="rating">
-      <option disabled value></option>Filter by rating:</option>
-      <option value=5>5 stars</option>
-      <option value=4>4 stars & above</option>
-      <option value=3>3 stars & above</option>
-      <option value=2>2 stars & above</option>
-      <option value=1>1 star & above</option>
-  </select>
-</div>
-  `;
-}
 //template generator for add new bookmark and rating forms
 function addBookmarkPage() {
   return `
-  <form class="js-addNewBookmark">
+  <form id="js-addNewBookmark">
           <label for="add-new-bookmark">Add a bookmark</label>
           <input
             type="text"
-            name="bookmark-entry"
+            name="bookmarkEntry"
             class="bookmark-entry"
             placeholder="e.g., www.github.com"
           />
           <input
             type="text"
-            name="bookmark-title"
+            name="bookmarkTitle"
             class="bookmark-title"
             placeholder="e.g., my bookmark title"
           />
-          <form id="js-addNewRating">
                       <fieldset>
                         <ul class="rate-area">
                           <input
@@ -58,11 +41,9 @@ function addBookmarkPage() {
                           /><label for="1-star" title="Bad"></label>
                         </ul>
                       </fieldset>
-                    </form>
-        <form>
           <input
             type="text"
-            name="bookmark-description"
+            name="bookmarkDescription"
             class="bookmark-description"
             placeholder="e.g., Add a description (optional)"
           />
@@ -77,16 +58,13 @@ function addBookmarkPage() {
 function bookMarksList() {
   return `
   <ul class="bookmark-list js-bookmark-list">
-  <li>guaysighuiilrgnbaiu</li>
+  <li></li>
 </ul>
 `;
 }
 
 //render the HTML strings
-function renderInitialPage() {
-  const showInitialPage = initialPage();
-  $('#initialPageButtons').html(showInitialPage);
-}
+
 function renderAddBookmarkPage() {
   const showBookmarkPage = addBookmarkPage();
   $('#js-addBookmarkPage').html(showBookmarkPage);
@@ -97,20 +75,10 @@ function renderBookMarksList() {
 }
 
 function handleErrorMessage() {
-  $('#js-error').html(`returned an error ${STORE.error}`)
-}
-
-function render() {
-  if (STORE.error !== null) {
-    handleErrorMessage();
-  }
-  if (STORE.adding === true) {
-    renderAddBookmarkPage();
-  }
-  else renderBookMarksList();
+  $('#js-error').html(`returned an error ${STORE.error}`);
 }
 
 //export the HTML modules for use by JS
 export default {
-  render
+  addBookmarkPage
 };

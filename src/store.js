@@ -1,30 +1,38 @@
-// // const bookMarks = [];
-// // //add a new bookmark
-// const bookmarks = [];
-// const hideDescription = false;
 
-// function findById(id) {
-//   return this.bookmarks.find(bookmarks => bookmarks.id === id);
-// }
+const bookmarks = [];
+let hideDescription = false;
+let adding = false;
+let error = null;
+let filter = 0;
 
-// function addBookmark(bookmarks) {
-//   this.bookmarks.push(bookmarks);
-// }
 
-// function togglehideDescriptionFilter() {
-//   this.hideDescription = !this.hideDescription;
-// }
+function findById(id) {
+  return this.bookmarks.find(bookmarks => bookmarks.id === id);
+}
 
-// function findAndUpdateBookmarks(id, newData) {
-//   let oldData = this.findById(id);
-//   Object.assign(oldData, newData);
-// }
+function addBookmark(bookmarks) {
+  this.bookmarks.push(Object.assign(bookmarks, {
+    expanded: false
+  }));
+}
 
-// export default {
-//   bookmarks,
-//   hideDescription,
-//   findById,
-//   addBookmark,
-//   togglehideDescriptionFilter,
-//   findAndUpdateBookmarks,
-// };
+function togglehideDescriptionFilter() {
+  this.hideDescription = !this.hideDescription;
+}
+
+function findAndUpdateBookmarks(id, newData) {
+  let oldData = this.findById(id);
+  Object.assign(oldData, newData);
+}
+
+export default {
+  bookmarks,
+  adding,
+  error,
+  filter,
+  hideDescription,
+  findById,
+  addBookmark,
+  togglehideDescriptionFilter,
+  findAndUpdateBookmarks,
+};

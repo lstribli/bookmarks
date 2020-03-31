@@ -14,13 +14,29 @@
   <body>
     <main>
       <h1>Logan's Bookmark App</h1>
-      <body>
-        <div id="js-initialPage" class="js-initialPage"></div>
+        <div id="js-initialPage" class="js-initialPage">
+          <div class="startButtons"></div>
+          <button class="addNew" id="addNew" type="addNew">Add New</button>
+        </div>
+        
+        <div id="formAddBookmarkForm"></div>
+
+        <div class="filter-menu">
+  <select id="dropdown" name="rating">
+      <option disabled value></option>Filter by rating:</option>
+      <option value=5>5 stars</option>
+      <option value=4>4 stars & above</option>
+      <option value=3>3 stars & above</option>
+      <option value=2>2 stars & above</option>
+      <option value=1>1 star & above</option>
+  </select>
+</div>
+    
 
         <div id="js-addNewBookmark" class="js-addNewBookmark"></div>
 
         <ul id="js-bookmarkList" class="js-bookmarkList"></ul>
-      </body>
+
     </main>
   </body>
 

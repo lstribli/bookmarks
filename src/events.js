@@ -1,5 +1,17 @@
 import $ from 'jquery';
 import pages from "./pages";
+import api from "./api";
+import STORE from './store';
+//when add new is clicked, show the add bookmark page
+
+function addNewOnClick() {
+  $('#addNew').click(() => {
+    STORE.adding = !STORE.adding;
+    render();
+
+  });
+}
+
 
 //dropdown menu function code
 function dropDown() {
@@ -12,23 +24,23 @@ function dropDown() {
       const bookmarks = STORE.list.filter(bookmarks => bookmarks.rating >= 1);
       return bookmarks;
     }
-    pages.render();
+    render();
   });
 }
 
-const generateBookmarkElement = function (item) {
-  let bookmarkTitle = `<span class="bookmark-item bookmark-item__checked">${bookmarks.name}</span>`;
-  if (!bookmarks.checked) {
+const generateBookmarkElement = function (bookmarks) {
+  let bookmarkTitle = `<span class="bookmark-item bookmark-item__checked">${bookmarks.title}</span>`;
+  if (!bookmarks.expanded) {
     bookmarkTitle = `
       <form class="js-edit-bookmark">
-        <input class="bookmark-item" type="text" value="${bookmarks.name}" />
+        <input class="bookmark-item" type="text" value="${bookmarks.title}" />
       </form>
     `;
   }
 
   return `
     <li class="js-bookmark-element" data-bookmark-id="${bookmarks.id}">
-      ${bookmarksTitle}
+      ${bookmarkTitle}
       <div class="bookmark-item-controls">
         <button class="bookmark-item-toggle js-item-toggle">
           <span class="button-label">check</span>
@@ -40,32 +52,38 @@ const generateBookmarkElement = function (item) {
     </li>`;
 };
 const generateBookmarksString = function (bookmarksList) {
-  const bookmarks = bookmarks.map(bookmarks => generateItemElement(bookmarks));
-  return bookmarks.join("");
+  const bookmarks = bookmarksList.map(bookmarks => generateBookmarkElement(bookmarks));
+  return bookmarks.join('');
 };
 
 const render = function () {
-  let bookmarks = [...store.bookmarks];
-  if (store.hideCheckedBookmarks) {
-    bookmarks = bookmarks.filter(bookmark => !bookmark.checked);
+  let bookmarks = [...STORE.bookmarks];
+  if (STORE.adding === true) {
+    $('#formAddBookmarkForm').html(pages.addBookmarkPage());
   }
-  const bookmarksListString = renderAddBookmarksPage(bookmarks);
-  $(".js-bookmarkList").html(bookmarksListString);
+  else {
+    $('#js-bookmarkList').html(generateBookmarksString(bookmarks));
+  }
+  // const bookmarksListString = renderAddBookmarksPage(bookmarks);
+  // $(".js-bookmarkList").html(bookmarksListString);
 };
 
 const handleNewBookmarkSubmit = function () {
-  $("#js-addNewBookmark").submit(function (event) {
+  $('main').on('submit', 'form#js-addNewBookmark', function (event) {
     event.preventDefault();
-    const newBookmarkName = $(".bookmark-entry").val();
-    $(".bookmark-entry").val("");
-    api.createBookmark(newBookmarkName)
-      .then(results => results.json())
+    const newBookmark = {
+      title: event.target.bookmarkTitle.value,
+      url: event.target.bookmarkEntry.value,
+      desc: event.target.bookmarkDescription.value,
+      rating: parseInt(event.target.rating.value, 10)
+    };
+    console.log(newBookmark);
+    api.createBookmark(newBookmark)
       .then((newBookmark) => {
-        store.addItem(newBookmark);
-        console.log(newBookmark);
+        STORE.adding = false;
+        STORE.addBookmark(newBookmark);
         render();
       });
-    console.log(newBookmarkName);
   });
 };
 
@@ -76,27 +94,27 @@ const handleItemCheckClicked = function () {
     api.updateItem(id, { checked: !bookmark.checked })
       .then(response => response.json()
         .then(() => {
-          store.findAndUpdate(id, { checked: !bookmark.checked });
+          STORE.findAndUpdate(id, { checked: !bookmark.checked });
           render();
         })
         .catch((error) => {
           console.log('something went wrong', error)
         }));
-  })
-}
+  });
+};
 const getItemIdFromElement = function (bookmark) {
   return $(bookmark)
-    .closest(".js-item-element")
-    .data("item-id");
+    .closest('.js-item-element')
+    .data('item-id');
 };
 
 const handleDeleteBookmarkClicked = function () {
-  $(".js-shopping-list").on("click", ".js-item-delete", event => {
+  $('.js-shopping-list').on('click', '.js-item-delete', event => {
     const id = getItemIdFromElement(event.currentTarget);
     api.updateItem(id, item)
-    then(response => response.json())
+      .then(response => response.json())
       .then(() => {
-        store.findAndUpdate(id, { item: [''] });
+        STORE.findAndUpdate(id, { item: [''] });
         render();
       }
       );
@@ -104,21 +122,21 @@ const handleDeleteBookmarkClicked = function () {
 };
 
 const handleToggleFilterClick = function () {
-  $(".js-filter-checked").click(() => {
-    store.toggleCheckedFilter();
+  $('.js-filter-checked').click(() => {
+    STORE.toggleCheckedFilter();
     render();
   });
 };
 
 const handleEditBookmarkSubmit = function () {
-  $(".js-shopping-list").on("submit", ".js-edit-item", event => {
+  $('.js-shopping-list').on('submit', '.js-edit-item', event => {
     event.preventDefault();
     const id = getItemIdFromElement(event.currentTarget);
     const bookmarkName = $(event.currentTarget)
-      .find(".shopping-item")
+      .find('.shopping-item')
       .val();
-    store.findAndUpdateName(id, bookmarkName);
-    store.findAndUpdate(id, bookmarkName);
+    STORE.findAndUpdateName(id, bookmarkName);
+    STORE.findAndUpdate(id, bookmarkName);
     api.updateItem(id, { bookmarkName })
       .then(response => response.json())
       .then(bookmarkName => {
@@ -135,6 +153,7 @@ const bindEventListeners = function () {
   handleDeleteBookmarkClicked();
   handleItemCheckClicked();
   handleNewBookmarkSubmit();
+  addNewOnClick();
   // generateBookmarksString();
 };
 

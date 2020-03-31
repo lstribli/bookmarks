@@ -11,7 +11,7 @@ const main = function () {
     // .then(res => res.json())
     .then((bookmarks) => {
       bookmarks.forEach((bookmark) => store.addBookmark(bookmark));
-      pages.render();
+      events.render();
     });
   events.bindEventListeners();
 };

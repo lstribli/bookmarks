@@ -7,17 +7,16 @@ function getUrl() {
   return listApiFetch(url);
 }
 
-function createList(bookmark) {
-  let newBookmark = {};
-  newBookmark.name = name;
+function createBookmark(bookmark) {
+
   const option = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(newBookmark),
+    body: JSON.stringify(bookmark),
   };
-  let url = `${BASE_URL}/bookmarks`;
+  let url = `${BASE_URL}`;
   return listApiFetch(url, option);
 }
 
@@ -68,7 +67,8 @@ const listApiFetch = function (...args) {
 
 export default {
   getUrl,
-  createList,
+
+  createBookmark,
   updateBookmarks,
   listApiFetch
 };
