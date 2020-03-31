@@ -19,102 +19,114 @@
 
         <div class="js-initialPage">
           <div class="startButtons"></div>
-          <button class="addNew" type="addNew">Add New</button>
-          <button class="filter" type="filter">Filter</button>
-        </div>
-
-        <div class="js-addBookmarkPage">
-          <form class="addNewBookmark">
-            <label for="add-new-bookmark">Add a bookmark</label>
-            <input
-              type="text"
-              name="bookmark-entry"
-              class="bookmark-entry"
-              placeholder="e.g., www.github.com"
-            />
-            <input
-              type="text"
-              name="bookmark-title"
-              class="bookmark-title"
-              placeholder="e.g., my bookmark title"
-            />
-            <form class="addNewRating">
-              <fieldset>
-                <ul class="rate-area">
-                  <input
-                    type="radio"
-                    id="5-star"
-                    name="rating"
-                    value="5"
-                  /><label for="5-star" title="Amazing"></label>
-
-                  <input
-                    type="radio"
-                    id="4-star"
-                    name="rating"
-                    value="4"
-                  /><label for="4-star" title="Good"></label>
-
-                  <input
-                    type="radio"
-                    id="3-star"
-                    name="rating"
-                    value="3"
-                  /><label for="3-star" title="Average"></label>
-
-                  <input
-                    type="radio"
-                    id="2-star"
-                    name="rating"
-                    value="2"
-                  /><label for="2-star" title="Not Good"></label>
-
-                  <input
-                    type="radio"
-                    id="1-star"
-                    name="rating"
-                    value="1"
-                  /><label for="1-star" title="Bad"></label>
-                </ul>
-              </fieldset>
-            </form>
-            <input
-              type="text"
-              name="bookmark-description"
-              class="bookmark-description"
-              placeholder="e.g., Add a description (optional)"
-            />
-            <div class="buttons">
-              <button class="cancel" type="cancel">cancel</button>
-              <button class="create" type="create">create</button>
-            </div>
-          </form>
-        </div>
-        <div class="js-bookmarkList">]
-          <div class="js-bookmarkList">
-          <ul class="bookmark-list js-bookmark-list">
-            
-          </ul>
-        </div>
+          <button class="addNew" id="addNew" type="addNew">Add New</button>
+        <div class="filter-menu">
+          <select id="dropdown" name="rating">
+              <option disabled value></option>Filter by rating:</option>
+              <option value=5>5 stars</option>
+              <option value=4>4 stars & above</option>
+              <option value=3>3 stars & above</option>
+              <option value=2>2 stars & above</option>
+              <option value=1>1 star & above</option>
+          </select>
       </div>
+        </div>
+        
+        <div id="js-addNewBookmark"> <form class="js-addNewBookmark">
+          <label for="add-new-bookmark">Add a bookmark</label>
+          <input
+            type="text"
+            name="bookmark-entry"
+            class="bookmark-entry"
+            placeholder="e.g., www.github.com"
+          />
+          <input
+            type="text"
+            name="bookmark-title"
+            class="bookmark-title"
+            placeholder="e.g., my bookmark title"
+          />
+          <form id="js-addNewRating">
+                      <fieldset>
+                        <ul class="rate-area">
+                          <input
+                            type="radio"
+                            id="5-star"
+                            name="rating"
+                            value="5"
+                          /><label for="5-star" title="Amazing"></label>
+        
+                          <input
+                            type="radio"
+                            id="4-star"
+                            name="rating"
+                            value="4"
+                          /><label for="4-star" title="Good"></label>
+        
+                          <input
+                            type="radio"
+                            id="3-star"
+                            name="rating"
+                            value="3"
+                          /><label for="3-star" title="Average"></label>
+        
+                          <input
+                            type="radio"
+                            id="2-star"
+                            name="rating"
+                            value="2"
+                          /><label for="2-star" title="Not Good"></label>
+        
+                          <input
+                            type="radio"
+                            id="1-star"
+                            name="rating"
+                            value="1"
+                          /><label for="1-star" title="Bad"></label>
+                        </ul>
+                      </fieldset>
+                    </form>
+        <form>
+          <input
+            type="text"
+            name="bookmark-description"
+            class="bookmark-description"
+            placeholder="e.g., Add a description (optional)"
+          />
+          <div class="buttons">
+            <button class="cancel" id="cancel" type="cancel">cancel</button>
+            <button class="create" id="create" type="submit">create</button>
+          </div>
+        </form></div>
+        <div class="js-bookmarkList">
+          <ul class="bookmark-list js-bookmark-list">
+            <li>ghiahbgviuae</li>
+          </ul>
         </div>
       </body>
     </main>
   </body>
+  
+  
   <script
     type="text/javascript"
-    src="/c/thinkful/projects/bookmarksApp/src/pages.js"
+    src="scripts/pages.js"
   ></script>
   <script
     type="text/javascript"
-    src="c/thinkful/projects/bookmarksApp/src/store.js"
+    src="store.js"
   ></script>
   <script
     type="text/javascript"
-    src="c/thinkful/projects/bookmarksApp/src/api.js"
+    src="scripts/events.js"
   ></script>
   <script
+  type="text/javascript"
+  src="scripts/api.js"
+></script>
+  <script
     type="text/javascript"
-    src="c/thinkful/projects/bookmarksApp/src/index.js"
+    src="scripts/index.js"
   ></script>
+
 </html>

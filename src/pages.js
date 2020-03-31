@@ -1,14 +1,16 @@
 import $ from 'jquery';
+
+//Generate the HTML strings
 function InitialPage() {
   return `
   <button class="addNew" type="addNew">Add New</button>
   <button class"filter" type="filter">Filter</button>
   `;
 }
-
+//template generator for add new bookmark and rating forms
 function addBookmarkPage() {
   return `
-  <form class="addNewBookmark">
+  <form class="js-addNewBookmark">
   <label for="add-new-bookmark">Add a bookmark</label>
   <input
     type="text"
@@ -22,7 +24,8 @@ function addBookmarkPage() {
     class="bookmark-title"
     placeholder="e.g., my bookmark title"
   />
-  <form class="addNewRating">
+  
+  <form class="js-addNewRating">
               <fieldset>
                 <ul class="rate-area">
                   <input
@@ -76,12 +79,14 @@ function addBookmarkPage() {
 </form>
 `;
 }
-
+//template generator for list of bookmarks
 function bookMarksList() {
   return `<div class="js-bookmarkList">
   <ul class="bookmark-list js-bookmark-list"></ul>
 </div>`;
 }
+
+//render the HTML strings
 function renderInitialPage() {
   const showInitialPage = InitialPage();
   $('.initialPageButtons').html(showInitialPage);
@@ -92,9 +97,12 @@ function renderAddBookmarkPage() {
 }
 function renderBookMarksList() {
   const showBookmarksList = bookMarksList();
-  $('js-bookmarkList').html(showBookmarksList);
+  $('.js-bookmarkList').html(showBookmarksList);
 }
 
+
+
+//export the HTML modules for use by JS
 export default {
   renderInitialPage,
   renderAddBookmarkPage,

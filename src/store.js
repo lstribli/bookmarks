@@ -1,26 +1,30 @@
 // const bookMarks = [];
 // //add a new bookmark
-const store = {
-  bookmarks: [
-    {
-      id: 'x56w',
-      title: 'Title 1',
-      rating: 3,
-      url: 'http://www.title1.com',
-      description: 'lorem ipsum dolor sit',
-      expanded: false
-    },
-    {
-      id: '6ffw',
-      title: 'Title 2',
-      rating: 5,
-      url: 'http://www.title2.com',
-      description: 'dolorum tempore deserunt',
-      expanded: false
-    } 
-    ...
-  ],
-  adding: false,
-  error: null,
-  filter: 0
+const bookmarks = [];
+const hideDescription = false;
+
+function findById(id) {
+  return this.bookmarks.find(bookmarks => bookmarks.id === id);
+}
+
+function addBookmark(bookmarks) {
+  this.bookmarks.push(bookmarks);
+}
+
+function togglehideDescriptionFilter() {
+  this.hideDescription = !this.hideDescription;
+}
+
+function findAndUpdateBookmarks(id, newData) {
+  let oldData = this.findById(id);
+  Object.assign(oldData, newData);
+}
+
+export default {
+  bookmarks,
+  hideDescription,
+  findById,
+  addBookmark,
+  togglehideDescriptionFilter,
+  findAndUpdateBookmarks,
 };

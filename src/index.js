@@ -1,40 +1,38 @@
 import $ from 'jquery';
-import { bookMarksList, renderInitialPage, renderAddBookmarkPage, renderBookMarksList } from './pages';
+import api from './api';
+import pages from './pages';
+import store from './store';
+import events from './events';
 
-function start() {
-  $('.js-addBookmarkPage').show();
-  $('.js-initialPage').show();
-  $('.js-bookmarkList').show();
-}
+import "index.css";
 
-function clickAddNew() {
-  $('.js-addBookmarkPage').show();
-  $('.js-initialPage').hide();
-  $('.js-bookmarkList').hide();
-}
+const main = function () {
+  api.getUrl()
+    .then(res => res.json())
+    .then((bookmarks) => {
+      bookmarks.foreach((bookmark) => store.addBookmark(bookmark));
+      bookmarksList.render();
+    });
 
-function clickFilter() {
-  $('.js-addBookmarkPage').hide();
-  $('.js-initialPage').show();
-  $('.js-bookmarkList').show();
-}
+  bookmarkList.bindEventListeners();
+  bookmarkList.render();
 
-function clickCancel() {
-  $('.js-addBookmarkPage').hide();
-  $('.js-initialPage').show();
-  $('.js-bookmarkList').show();
-}
+};
 
-function clickCreate() {
-  $('.js-addBookmarkPage').show();
-  $('.js-initialPage').hide();
-  $('.js-bookmarkList').hide();
-}
+$(main);
 
-function render() {
-  renderInitialPage();
-  renderAddBookmarkPage();
-  renderBookMarksList();
-  start();
-}
-$(render);
+
+
+//DEFINE PAGES
+//DEFINE API
+//DEFINE LOCAL STORE
+
+//make the add new button open the new bookmark page
+//make each field in the form push values to keys in an object
+//bookmark address will return a link 
+//title returns the name as a string
+//stars will log a value and feed into the sort by function
+//description returns a string that is hideable on click
+//CREATE will submit the form, creating a new object and its keys, storing the submitted things as values
+//PUSH the result to the server with assigned ID
+//PULL the the same object down by ID from the server and render it to the page

@@ -20,6 +20,10 @@ form {
 .addNewBookmark {
   color: lightblue;
 }
+.filter-menu {
+  background-color: lightblue;
+  border-radius: 25px;
+}
 input[type="text"],
 input[type="create"],
 input[type="cancel"] {
