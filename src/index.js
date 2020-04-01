@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import api from './api';
-import pages from './pages';
 import store from './store';
 import events from './events';
 import './index.css';

@@ -48,10 +48,12 @@ function addBookmarkPage() {
             placeholder="e.g., Add a description (optional)"
           />
           <div class="buttons">
-            <button class="cancel" id="cancel" type="cancel">cancel</button>
             <button class="create" id="create" type="submit">create</button>
           </div>
         </form>
+        <div class="buttons">
+            <button class="cancel" id="cancel" type="submit">cancel</button>
+            </div>
 `;
 }
 //template generator for list of bookmarks
@@ -80,5 +82,6 @@ function handleErrorMessage() {
 
 //export the HTML modules for use by JS
 export default {
-  addBookmarkPage
+  addBookmarkPage,
+  bookMarksList
 };
