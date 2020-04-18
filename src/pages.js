@@ -83,5 +83,8 @@ function handleErrorMessage() {
 //export the HTML modules for use by JS
 export default {
   addBookmarkPage,
-  bookMarksList
+  bookMarksList,
+  renderAddBookmarkPage,
+  renderBookMarksList,
+  handleErrorMessage
 };

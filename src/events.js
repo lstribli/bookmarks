@@ -2,43 +2,45 @@ import $ from 'jquery';
 import pages from './pages';
 import api from './api';
 import STORE from './store';
+import renderAddBookmarkPage from './pages';
 //when add new is clicked, show the add bookmark page
 
 function addNewOnClick() {
   $('#addNew').click(() => {
     STORE.adding = !STORE.adding;
+    console.log('adding');
+    // debugger;
+    // renderAddBookmarkPage();
     render();
   });
+
 }
-function cancelOnClick() {
-  $('body').click(() => {
-    //toggle store.adding state then re-render to make the add bookmark form disappear
-  });
-}
+
 const handleBookmarkCancel = function () {
   $('main').on('click', '#cancel', function (event) {
     event.preventDefault();
-    STORE.adding === false;
+    STORE.adding = !STORE.adding;
     console.log('cancelled');
+    $('#formAddBookmarkForm').empty();
     render();
   });
 };
 
 
-//dropdown menu function code
-// function dropDown() {
-//   $('.filter-menu').on('click', '#dropdown', event => {
-//     event.preventDefault();
-//     console.log('dropdown menu option clicked!');
+// dropdown menu function code
+function dropDown() {
+  $('.filter-menu').on('click', '#dropdown', event => {
+    event.preventDefault();
+    console.log('dropdown menu option clicked!');
 
-//     let value = $(this).val();
-//     if (value === 1) {
-//       const bookmarks = STORE.list.filter(bookmarks => bookmarks.rating >= 1);
-//       return bookmarks;
-//     }
-//     render();
-//   });
-// }
+    let value = $(this).val();
+    if (value === 1) {
+      const bookmarks = STORE.list.filter(bookmarks => bookmarks.rating >= 1);
+      return bookmarks;
+    }
+    render();
+  });
+}
 
 const generateBookmarkElement = function (bookmarks) {
   let bookmarkTitle = `<span class="bookmark-item bookmark-item__checked">${bookmarks.title}</span>`;
@@ -169,8 +171,10 @@ const bindEventListeners = function () {
   handleNewBookmarkSubmit();
   handleBookmarkCancel();
   addNewOnClick();
-  cancelOnClick();
-  // generateBookmarksString();
+  // cancelOnClick();
+  dropDown();
+  console.log('bindEventListeners: firing');
+  generateBookmarksString();
 };
 
 export default {
