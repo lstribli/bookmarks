@@ -6,7 +6,6 @@ function getUrl() {
 }
 
 function createBookmark(bookmark) {
-
   const option = {
     method: 'POST',
     headers: {
@@ -18,18 +17,18 @@ function createBookmark(bookmark) {
   return listApiFetch(url, option);
 }
 
-// function updateBookmarks(id, updateData) {
-//   let data = updateData;
-//   const option = {
-//     method: 'PATCH',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(data),
-//   };
-//   let url = `${BASE_URL}/bookmarks/${id}`;
-//   return listApiFetch(url, option);
-// }
+function updateBookmarks(id, updateData) {
+  let data = updateData;
+  const option = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  };
+  let url = `${BASE_URL}/bookmarks/${id}`;
+  return listApiFetch(url, option);
+}
 
 function deleteBookmarks(id) {
   const option = {
@@ -48,7 +47,6 @@ const listApiFetch = function (...args) {
     .then(res => {
       if (!res.ok) {
         error = { code: res.status };
-
         if (!res.headers.get('content-type').includes('json')) {
           error.message = res.statusText;
           return Promise.reject(error);
@@ -57,12 +55,10 @@ const listApiFetch = function (...args) {
       return res.json();
     })
     .then(data => {
-
       if (error) {
         error.message = data.message;
         return Promise.reject(error);
       }
-      // otherwise, return the json as normal resolved Promise
       return data;
     });
 };
@@ -70,7 +66,7 @@ const listApiFetch = function (...args) {
 export default {
   getUrl,
   createBookmark,
-  // updateBookmarks,
+  updateBookmarks,
   listApiFetch,
   deleteBookmarks
 };

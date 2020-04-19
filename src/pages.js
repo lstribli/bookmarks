@@ -1,8 +1,6 @@
 import $ from 'jquery';
 import STORE from './store';
 
-//Generate the HTML strings
-//template generator for add new bookmark and rating forms
 function addBookmarkPage() {
   return `
   <form id="js-addNewBookmark">

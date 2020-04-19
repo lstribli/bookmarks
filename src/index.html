@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- <link rel="stylesheet" type="text/css" href="index.css" /> -->
+
+    <title>Logan's Bookmark App</title>
+  </head>
+  <body>
+    <main>
+      <h1>Logan's Bookmark App</h1>
+        <div id="js-initialPage" class="js-initialPage">
+          <div class="startButtons">
+          <button class="addNew" id="addNew" type="addNew">Add New</button>
+        </div>
+      
+        <div class="filter-menu">
+          <label for="dropdown">Filter by Rating</label>
+  <select id="dropdown" name="rating" >
+      <option disabled value></option>Filter by rating:</option>
+      <option value='5'>5 stars</option>
+      <option value='4'>4 stars</option>
+      <option value='3'>3 stars</option>
+      <option value='2'>2 stars</option>
+      <option value='1'>1 star</option>
+  </select>
+</div>
+</div>
+
+<section class="bookmarkform">
+  <div id="formAddBookmarkForm"></div>
+</section>
+
+
+        <ul id="js-bookmarkList" class="js-bookmarkList"></ul>
+
+    </main>
+  </body>
+
+  <script type="text/javascript" src="/src/api.js"></script>
+  <script type="text/javascript" src="/src/events.js"></script>
+  <script type="text/javascript" src="/src/pages.js"></script>
+  <script type="text/javascript" src="/src/store.js"></script>
+  <script type="text/javascript" src="/src/index.js"></script>
+</html>
