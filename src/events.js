@@ -68,9 +68,11 @@ const deleteListItem = function (id) {
   STORE.bookmarks.splice(index, 1);
 };
 const handleDeleteBookmarkClicked = function () {
-  $('.js-bookmark-list').on('click', '.js-item-delete', event => {
+  $('.js-bookmarkList').on('click', '#js-item-delete', event => {
+    event.preventDefault();
+    console.log('handleDelete: firing');
     const id = getItemIdFromElement(event.currentTarget);
-    api.updateItem(id, STORE)
+    api.deleteBookmarks(id, STORE)
       .then(response => response.json());
     console.log('delete')
       .then(() => {
@@ -115,55 +117,32 @@ const handleNewBookmarkSubmit = function () {
   });
 };
 
-// const handleItemCheckClicked = function () {
-//   $('.js-shopping-list').on('click', '.js-item-toggle', event => {
-//     const id = getItemIdFromElement(event.currentTarget);
-//     const bookmark = STORE.findById(id);
-//     api.updateItem(id, { checked: !bookmark.checked })
-//       .then(response => response.json()
-//         .then(() => {
-//           STORE.findAndUpdate(id, { checked: !bookmark.checked });
-//           render();
-//         })
-//         .catch((error) => {
-//           ('something went wrong', error);
-//         }));
-//   });
-// };
 const getItemIdFromElement = function (bookmark) {
   return $(bookmark)
     .data('bookmark-id');
 };
 
 
-
-// const handleToggleFilterClick = function () {
-//   $('.js-filter-checked').click(() => {
-//     STORE.toggleCheckedFilter();
+// const handleEditBookmarkSubmit = function () {
+//   $('.js-bookmarkList').on('submit', event => {
+//     event.preventDefault();
+//     const id = getItemIdFromElement(event.currentTarget);
+//     const bookmarkName = $(event.currentTarget)
+//       .val();
+//     STORE.findAndUpdateName(id, bookmarkName);
+//     STORE.findAndUpdate(id, bookmarkName);
+//     api.updateBookmarks(id, { bookmarkName })
+//       .then(response => response.json())
+//       .then(bookmarkName => {
+//         STORE.findAndUpdate(id, { bookmarkName });
+//         render();
+//       });
 //     render();
 //   });
 // };
 
-const handleEditBookmarkSubmit = function () {
-  $('.js-bookmarkList').on('submit', event => {
-    event.preventDefault();
-    const id = getItemIdFromElement(event.currentTarget);
-    const bookmarkName = $(event.currentTarget)
-      .val();
-    STORE.findAndUpdateName(id, bookmarkName);
-    STORE.findAndUpdate(id, bookmarkName);
-    api.updateItem(id, { bookmarkName })
-      .then(response => response.json())
-      .then(bookmarkName => {
-        STORE.findAndUpdate(id, { bookmarkName });
-        render();
-      });
-    render();
-  });
-};
-
 const bindEventListeners = function () {
-  handleEditBookmarkSubmit();
+  // handleEditBookmarkSubmit();
   // handleToggleFilterClick();
   deleteListItem();
   handleDeleteBookmarkClicked();

@@ -16,9 +16,9 @@ function addBookmark(bookmarks) {
   }));
 }
 
-function togglehideDescriptionFilter() {
-  this.hideDescription = !this.hideDescription;
-}
+// function togglehideDescriptionFilter() {
+//   this.hideDescription = !this.hideDescription;
+// }
 
 function findAndUpdateBookmarks(id, newData) {
   let oldData = this.findById(id);
@@ -33,6 +33,6 @@ export default {
   hideDescription,
   findById,
   addBookmark,
-  togglehideDescriptionFilter,
+  // togglehideDescriptionFilter,
   findAndUpdateBookmarks,
 };

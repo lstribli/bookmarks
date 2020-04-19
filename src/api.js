@@ -18,18 +18,28 @@ function createBookmark(bookmark) {
   return listApiFetch(url, option);
 }
 
-function updateBookmarks(id, updateData) {
-  let data = updateData;
+// function updateBookmarks(id, updateData) {
+//   let data = updateData;
+//   const option = {
+//     method: 'PATCH',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(data),
+//   };
+//   let url = `${BASE_URL}/bookmarks/${id}`;
+//   return listApiFetch(url, option);
+// }
+
+function deleteBookmarks(id) {
   const option = {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
+    method: 'DELETE',
   };
+
   let url = `${BASE_URL}/bookmarks/${id}`;
   return listApiFetch(url, option);
 }
+
 
 const listApiFetch = function (...args) {
   // setup var in scope outside of promise chain
@@ -59,8 +69,8 @@ const listApiFetch = function (...args) {
 
 export default {
   getUrl,
-
   createBookmark,
-  updateBookmarks,
-  listApiFetch
+  // updateBookmarks,
+  listApiFetch,
+  deleteBookmarks
 };
