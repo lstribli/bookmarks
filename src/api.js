@@ -1,3 +1,4 @@
+import findById from './store';
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/logan/bookmarks';
 
 function getUrl() {
@@ -21,12 +22,10 @@ function updateBookmarks(id, updateData) {
   let data = updateData;
   const option = {
     method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
     body: JSON.stringify(data),
   };
-  let url = `${BASE_URL}/bookmarks/${id}`;
+  console.log('updateBookmarks(api):', data);
+  let url = `${BASE_URL}/${id}`;
   return listApiFetch(url, option);
 }
 
@@ -34,14 +33,13 @@ function deleteBookmarks(id) {
   const option = {
     method: 'DELETE',
   };
-
-  let url = `${BASE_URL}/bookmarks/${id}`;
+  console.log('delete bookmark API:', id);
+  let url = `${BASE_URL}/${id}`;
   return listApiFetch(url, option);
 }
 
 
 const listApiFetch = function (...args) {
-  // setup var in scope outside of promise chain
   let error;
   return fetch(...args)
     .then(res => {

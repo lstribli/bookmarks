@@ -3,7 +3,7 @@ const bookmarks = [];
 let hideDescription = true;
 let adding = false;
 let error = null;
-let rating = 0;
+let filter = 0;
 
 function findById(id) {
   return this.bookmarks.find(bookmarks => bookmarks.id === id);
@@ -25,7 +25,7 @@ export default {
   adding,
   error,
   hideDescription,
-  rating,
+  filter,
   findById,
   addBookmark,
   findAndUpdateBookmarks,

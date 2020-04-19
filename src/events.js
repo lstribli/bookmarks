@@ -2,6 +2,7 @@ import $ from 'jquery';
 import pages from './pages';
 import api from './api';
 import STORE from './store';
+import findById from './store';
 // import renderAddBookmarkPage from './pages';
 //when add new is clicked, show the add bookmark page
 
@@ -63,15 +64,22 @@ const handleNewBookmarkSubmit = function () {
   });
 };
 
-const getItemIdFromElement = function (bookmark) {
-  return $(bookmark)
-    .data('bookmark-id');
-};
+
 
 function generateBookmarkElement(bookmarks) {
+  const bookmarkTitle = bookmarks.title;
+  const bookmarkRating = bookmarks.rating;
+  const bookmarkId = bookmarks.id;
+  const bookmarkDescription = bookmarks.desc;
+  const bookmarkURL = bookmarks.url;
+  console.log(bookmarkId);
+  console.log(bookmarkTitle);
+  console.log(bookmarkRating);
+  console.log(bookmarkDescription);
+  console.log(bookmarkURL);
   if (STORE.hideDescription === true) {
     return `
-    <li class="js-bookmark-element">
+    <li class="js-bookmark-element" id="${bookmarks.id}">
       ${bookmarks.title}
       ${bookmarks.rating}
       <div class="bookmark-item-controls">
@@ -84,7 +92,7 @@ function generateBookmarkElement(bookmarks) {
   if (STORE.hideDescription === false) {
     return `
     <li class="js-bookmark-element">
-    <li>${bookmarks.id}</li>
+    <li id="${bookmarks.id}"></li>
     <li>${bookmarks.title}</li>
     <li>${bookmarks.url}</li>
     <li>${bookmarks.desc}</li>
@@ -157,14 +165,21 @@ function generateBookmarkElement(bookmarks) {
   }
 }
 
+function getItemIdFromElement() {
+  let id = event.currentTarget.map(id);
+  console.log('GetitemIdfromELEMENT:', id);
+}
 
 const handleExpand = function () {
   $('.js-bookmarkList').on('click', '.expand', event => {
     event.preventDefault();
+    // let id = STORE.bookmarks.findById(id);
+    // console.log(id);
     STORE.hideDescription = !STORE.hideDescription;
     render();
   });
 };
+
 const handleEdit = function () {
   $('.js-bookmarkList').on('click', '.edit', event => {
     event.preventDefault();
@@ -176,6 +191,15 @@ const handleEditCancel = function () {
   $('.js-bookmarkList').on('click', '.can', event => {
     event.preventDefault();
     STORE.hideDescription = true;
+    render();
+  });
+};
+const handleEditSubmit = function () {
+  $('.js-editBookmark').on('submit', '#submit', event => {
+    event.preventDefault();
+    STORE.hideDescription = true;
+    api.updateBookmarks();
+
     render();
   });
 };
@@ -219,6 +243,7 @@ const bindEventListeners = function () {
   dropDown();
   handleExpand();
   handleEdit();
+  handleEditSubmit();
   handleEditCancel();
 };
 
