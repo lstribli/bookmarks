@@ -1,4 +1,4 @@
-import findById from './store';
+
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/logan/bookmarks';
 
 function getUrl() {
@@ -6,13 +6,13 @@ function getUrl() {
   return listApiFetch(url);
 }
 
-function createBookmark(bookmark) {
+function createBookmark(data) {
   const option = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(bookmark),
+    body: JSON.stringify(data),
   };
   let url = `${BASE_URL}`;
   return listApiFetch(url, option);
